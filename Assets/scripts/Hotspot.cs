@@ -18,6 +18,9 @@ public class Hotspot : MonoBehaviour
         if (OnEntered != null)
         {
             OnEntered(other.gameObject);
+
+			/* Remove this hotspot when triggered */
+			Destroy (this.gameObject);
         }
 
     }
