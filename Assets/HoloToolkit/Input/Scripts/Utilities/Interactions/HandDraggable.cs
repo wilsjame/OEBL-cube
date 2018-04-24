@@ -89,7 +89,7 @@ namespace HoloToolkit.Unity.InputModule
         {
             if (IsDraggingEnabled && isDragging)
             {
-                Debug.Log("Trace HandDraggable", gameObject);
+                //Debug.Log("Trace HandDraggable", gameObject);
                 UpdateDragging();
             }
         }
