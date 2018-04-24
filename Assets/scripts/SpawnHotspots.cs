@@ -22,18 +22,39 @@ public class SpawnHotspots : MonoBehaviour {
 		}
 	}
 
+	/* Another global variable (oh no!) to keep track of list iterations */
+	public int itr = 0;
+
 	/* Use this for initialization */
 	void Start () {
 
 		/* Time delay function must be started as a coroutine as it is persistent */
 		StartCoroutine (TimeDelayInstantiate ()); 
-
+	
 	}
 
 	/* Update is called once per frame */
 	void Update () {
 	}
 
+	// This function is called from Hotspot.cs
+	public void testFunction () {
+
+		// Create a list of ints
+		List<string> testList = new List<string> ();
+		testList.Add("Hello ");
+		testList.Add("from ");
+		testList.Add("testList!");
+
+		// Emulate state persistence using the global itr
+		if (testList.Count > 0) {
+
+			Debug.Log(testList[itr]);
+			itr++;
+
+		}
+			
+	}
 	/* Time delay object generation */
 	IEnumerator TimeDelayInstantiate () {
 
@@ -77,7 +98,7 @@ public class SpawnHotspots : MonoBehaviour {
 		CoOrds coords_27 = new CoOrds (0.6f, 0.6f, 0.6f); coOrds_collection.Add (coords_27);
 
 		/* Begin spawning */ 
-		while (coOrds_collection.Count > 0) {
+		while (coOrds_collection.Count > 24) {
 
 			/* Time delay */ 
 			yield return new WaitForSeconds (2);

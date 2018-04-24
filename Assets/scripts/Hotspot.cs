@@ -19,6 +19,9 @@ public class Hotspot : MonoBehaviour
         {
             OnEntered(other.gameObject);
 
+			/* Call test function */
+			GameObject.Find ("GameObject_SpawnHotSpots").GetComponent<SpawnHotspots> ().testFunction ();
+
 			/* Remove this hotspot when triggered */
 			Destroy (this.gameObject);
         }
