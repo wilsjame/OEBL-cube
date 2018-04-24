@@ -28,8 +28,8 @@ public class SpawnHotspots : MonoBehaviour {
 	/* Use this for initialization */
 	void Start () {
 
-		/* Time delay function must be started as a coroutine as it is persistent */
-		StartCoroutine (TimeDelayInstantiate ()); 
+		/* Call function once on startup to create initial hotspot */
+		HotSpotTriggerInstantiate ();
 	
 	}
 
@@ -37,29 +37,10 @@ public class SpawnHotspots : MonoBehaviour {
 	void Update () {
 	}
 
-	// This function is called from Hotspot.cs
-	public void testFunction () {
-
-		// Create a list of ints
-		List<string> testList = new List<string> ();
-		testList.Add("Hello ");
-		testList.Add("from ");
-		testList.Add("testList!");
-
-		// Emulate state persistence using the global itr
-		if (testList.Count > 0) {
-
-			Debug.Log(testList[itr]);
-			itr++;
-
-		}
-			
-	}
-	/* Time delay object generation */
-	IEnumerator TimeDelayInstantiate () {
+	/* This function is called from Hotspot.cs after Start () */
+	public void HotSpotTriggerInstantiate () {
 
 		/* Useful variable and data structure definitions */
-		//static Random rng = new Random(); 						/* Use for randomization */
 		CoOrds coords_temp = new CoOrds (); 					/* Create a temporary CoOrds struct */
 		List<CoOrds> coOrds_collection = new List<CoOrds> (); 	/* Use a list to handle data points */
 
@@ -98,31 +79,29 @@ public class SpawnHotspots : MonoBehaviour {
 		CoOrds coords_27 = new CoOrds (0.6f, 0.6f, 0.6f); coOrds_collection.Add (coords_27);
 
 		/* Begin spawning */ 
-		while (coOrds_collection.Count > 24) {
-
-			/* Time delay */ 
-			yield return new WaitForSeconds (2);
+		if (itr < coOrds_collection.Count) {
 
 			/* Debugging */
-			Debug.Log ("coOrds_collection count: " + coOrds_collection.Count);
+			Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 
 			/* Shuffle list to randomize spawn order */
 			//TODO
 
-			/* Copy the next coordinate in the list to the temp variable and then remove it from the list */
-			coords_temp = coOrds_collection [0];
-			coOrds_collection.RemoveAt (0);
+			/* Copy the next coordinate in the list to the temp variable */
+			coords_temp = coOrds_collection [itr];
+			itr++;
 
 			/* Spawn the point */ 
 			Instantiate (trigger_point, new Vector3 (coords_temp.x, coords_temp.y, coords_temp.z), Quaternion.identity);
 
 			/* Debugging */
-			if (coOrds_collection.Count == 0) {
-				Debug.Log ("Coords_Collection is empty!");
+			if (itr == coOrds_collection.Count) {
+				Debug.Log ("Entire Coords_Collection spawned!");
+				Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 			}
 
 		}
-
+			
 	}
 
 }

@@ -13,14 +13,13 @@ public class Hotspot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Trace1", gameObject);
-
+  
         if (OnEntered != null)
         {
             OnEntered(other.gameObject);
 
 			/* Call test function */
-			GameObject.Find ("GameObject_SpawnHotSpots").GetComponent<SpawnHotspots> ().testFunction ();
+			GameObject.Find ("GameObject_SpawnHotSpots").GetComponent<SpawnHotspots> ().HotSpotTriggerInstantiate ();
 
 			/* Remove this hotspot when triggered */
 			Destroy (this.gameObject);
@@ -30,7 +29,6 @@ public class Hotspot : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //Debug.Log("Trace2", gameObject);
 
         if (OnExited != null)
         {
