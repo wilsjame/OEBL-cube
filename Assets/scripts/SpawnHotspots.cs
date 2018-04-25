@@ -37,6 +37,7 @@ public class SpawnHotspots : MonoBehaviour {
 	void Update () {
 	}
 
+	/* Create and shuffle a list o
 	/* This function is called from Hotspot.cs after Start () */
 	public void HotSpotTriggerInstantiate () {
 
@@ -78,14 +79,30 @@ public class SpawnHotspots : MonoBehaviour {
 		CoOrds coords_26 = new CoOrds (0.3f, 0.6f, 0.6f); coOrds_collection.Add (coords_26);
 		CoOrds coords_27 = new CoOrds (0.6f, 0.6f, 0.6f); coOrds_collection.Add (coords_27);
 
+		/* Do only once, Fisher Yates shuffle list to randomize spawn order */
+		if (itr == 0) {
+
+			/* Debugging */ 
+			Debug.Log ("Shuffling hotspot spawn points!");
+
+			int random_placeholder;
+
+			for (int i = 0; i < coOrds_collection.Count; i++) {
+				random_placeholder = i + Random.Range (0, (coOrds_collection.Count - i) - 1);
+
+				/* Swap */
+				coords_temp = coOrds_collection [i];
+				coOrds_collection [i] = coOrds_collection [random_placeholder];
+				coOrds_collection [random_placeholder] = coords_temp;
+			}
+
+		}
+
 		/* Begin spawning */ 
 		if (itr < coOrds_collection.Count) {
-
+				
 			/* Debugging */
 			Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
-
-			/* Shuffle list to randomize spawn order */
-			//TODO
 
 			/* Copy the next coordinate in the list to the temp variable */
 			coords_temp = coOrds_collection [itr];
