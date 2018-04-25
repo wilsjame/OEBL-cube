@@ -36,10 +36,10 @@ public class SpawnHotspots : MonoBehaviour {
 	/* Update is called once per frame */
 	void Update () {
 	}
-
-	/* Create and shuffle a list o
+		
 	/* This function is called from Hotspot.cs after Start () */
-	public void HotSpotTriggerInstantiate () {
+	public void HotSpotTriggerInstantiate ()
+	{
 
 		/* Useful variable and data structure definitions */
 		CoOrds coords_temp = new CoOrds (); 					/* Create a temporary CoOrds struct */
@@ -47,37 +47,64 @@ public class SpawnHotspots : MonoBehaviour {
 
 		/* Create all the data points and add them to the list */
 		/* z = 0 frame				 (x, y, z) */
-		CoOrds coords_1 = new CoOrds (0, 0, 0); coOrds_collection.Add (coords_1);
-		CoOrds coords_2 = new CoOrds (0.3f, 0, 0); coOrds_collection.Add (coords_2);
-		CoOrds coords_3 = new CoOrds (0.6f, 0, 0); coOrds_collection.Add (coords_3);
-		CoOrds coords_4 = new CoOrds (0, 0.3f, 0); coOrds_collection.Add (coords_4);
-		CoOrds coords_5 = new CoOrds (0.3f, 0.3f, 0); coOrds_collection.Add (coords_5);
-		CoOrds coords_6 = new CoOrds (0.6f, 0.3f, 0); coOrds_collection.Add (coords_6);
-		CoOrds coords_7 = new CoOrds (0, 0.6f, 0); coOrds_collection.Add (coords_7);
-		CoOrds coords_8 = new CoOrds (0.3f, 0.6f, 0); coOrds_collection.Add (coords_8);
-		CoOrds coords_9 = new CoOrds (0.6f, 0.6f, 0); coOrds_collection.Add (coords_9);
+		CoOrds coords_1 = new CoOrds (0, 0, 0);
+		coOrds_collection.Add (coords_1);
+		CoOrds coords_2 = new CoOrds (0.3f, 0, 0);
+		coOrds_collection.Add (coords_2);
+		CoOrds coords_3 = new CoOrds (0.6f, 0, 0);
+		coOrds_collection.Add (coords_3);
+		CoOrds coords_4 = new CoOrds (0, 0.3f, 0);
+		coOrds_collection.Add (coords_4);
+		CoOrds coords_5 = new CoOrds (0.3f, 0.3f, 0);
+		coOrds_collection.Add (coords_5);
+		CoOrds coords_6 = new CoOrds (0.6f, 0.3f, 0);
+		coOrds_collection.Add (coords_6);
+		CoOrds coords_7 = new CoOrds (0, 0.6f, 0);
+		coOrds_collection.Add (coords_7);
+		CoOrds coords_8 = new CoOrds (0.3f, 0.6f, 0);
+		coOrds_collection.Add (coords_8);
+		CoOrds coords_9 = new CoOrds (0.6f, 0.6f, 0);
+		coOrds_collection.Add (coords_9);
 
 		/* z = 0.3 frame			  (x, y, z) */
-		CoOrds coords_10 = new CoOrds (0, 0, 0.3f); coOrds_collection.Add (coords_10);
-		CoOrds coords_11 = new CoOrds (0.3f, 0, 0.3f); coOrds_collection.Add (coords_11);
-		CoOrds coords_12 = new CoOrds (0.6f, 0, 0.3f); coOrds_collection.Add (coords_12);
-		CoOrds coords_13 = new CoOrds (0, 0.3f, 0.3f); coOrds_collection.Add (coords_13);
-		CoOrds coords_14 = new CoOrds (0.3f, 0.3f, 0.3f); coOrds_collection.Add (coords_14);
-		CoOrds coords_15 = new CoOrds (0.6f, 0.3f, 0.3f); coOrds_collection.Add (coords_15);
-		CoOrds coords_16 = new CoOrds (0, 0.6f, 0.3f); coOrds_collection.Add (coords_16);
-		CoOrds coords_17 = new CoOrds (0.3f, 0.6f, 0.3f); coOrds_collection.Add (coords_17);
-		CoOrds coords_18 = new CoOrds (0.6f, 0.6f, 0.3f); coOrds_collection.Add (coords_18);
+		CoOrds coords_10 = new CoOrds (0, 0, 0.3f);
+		coOrds_collection.Add (coords_10);
+		CoOrds coords_11 = new CoOrds (0.3f, 0, 0.3f);
+		coOrds_collection.Add (coords_11);
+		CoOrds coords_12 = new CoOrds (0.6f, 0, 0.3f);
+		coOrds_collection.Add (coords_12);
+		CoOrds coords_13 = new CoOrds (0, 0.3f, 0.3f);
+		coOrds_collection.Add (coords_13);
+		CoOrds coords_14 = new CoOrds (0.3f, 0.3f, 0.3f);
+		coOrds_collection.Add (coords_14);
+		CoOrds coords_15 = new CoOrds (0.6f, 0.3f, 0.3f);
+		coOrds_collection.Add (coords_15);
+		CoOrds coords_16 = new CoOrds (0, 0.6f, 0.3f);
+		coOrds_collection.Add (coords_16);
+		CoOrds coords_17 = new CoOrds (0.3f, 0.6f, 0.3f);
+		coOrds_collection.Add (coords_17);
+		CoOrds coords_18 = new CoOrds (0.6f, 0.6f, 0.3f);
+		coOrds_collection.Add (coords_18);
 
 		/* z = 0.6 frame			  (x, y, z) */
-		CoOrds coords_19 = new CoOrds (0, 0, 0.6f); coOrds_collection.Add (coords_19);
-		CoOrds coords_20 = new CoOrds (0.3f, 0, 0.6f); coOrds_collection.Add (coords_20);
-		CoOrds coords_21 = new CoOrds (0.6f, 0, 0.6f); coOrds_collection.Add (coords_21);
-		CoOrds coords_22 = new CoOrds (0, 0.3f, 0.6f); coOrds_collection.Add (coords_22);
-		CoOrds coords_23 = new CoOrds (0.3f, 0.3f, 0.6f); coOrds_collection.Add (coords_23);
-		CoOrds coords_24 = new CoOrds (0.6f, 0.3f, 0.6f); coOrds_collection.Add (coords_24);
-		CoOrds coords_25 = new CoOrds (0, 0.6f, 0.6f); coOrds_collection.Add (coords_25);
-		CoOrds coords_26 = new CoOrds (0.3f, 0.6f, 0.6f); coOrds_collection.Add (coords_26);
-		CoOrds coords_27 = new CoOrds (0.6f, 0.6f, 0.6f); coOrds_collection.Add (coords_27);
+		CoOrds coords_19 = new CoOrds (0, 0, 0.6f);
+		coOrds_collection.Add (coords_19);
+		CoOrds coords_20 = new CoOrds (0.3f, 0, 0.6f);
+		coOrds_collection.Add (coords_20);
+		CoOrds coords_21 = new CoOrds (0.6f, 0, 0.6f);
+		coOrds_collection.Add (coords_21);
+		CoOrds coords_22 = new CoOrds (0, 0.3f, 0.6f);
+		coOrds_collection.Add (coords_22);
+		CoOrds coords_23 = new CoOrds (0.3f, 0.3f, 0.6f);
+		coOrds_collection.Add (coords_23);
+		CoOrds coords_24 = new CoOrds (0.6f, 0.3f, 0.6f);
+		coOrds_collection.Add (coords_24);
+		CoOrds coords_25 = new CoOrds (0, 0.6f, 0.6f);
+		coOrds_collection.Add (coords_25);
+		CoOrds coords_26 = new CoOrds (0.3f, 0.6f, 0.6f);
+		coOrds_collection.Add (coords_26);
+		CoOrds coords_27 = new CoOrds (0.6f, 0.6f, 0.6f);
+		coOrds_collection.Add (coords_27);
 
 		/* Do only once, Fisher Yates shuffle list to randomize spawn order */
 		if (itr == 0) {
@@ -88,7 +115,7 @@ public class SpawnHotspots : MonoBehaviour {
 			int random_placeholder;
 
 			for (int i = 0; i < coOrds_collection.Count; i++) {
-				random_placeholder = i + Random.Range (0, (coOrds_collection.Count - i) - 1);
+				random_placeholder = i + Random.Range (0, coOrds_collection.Count - i);
 
 				/* Swap */
 				coords_temp = coOrds_collection [i];
@@ -97,10 +124,10 @@ public class SpawnHotspots : MonoBehaviour {
 			}
 
 		}
-
-		/* Begin spawning */ 
+			
+		/* Begin spawning */
 		if (itr < coOrds_collection.Count) {
-				
+			
 			/* Debugging */
 			Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 
@@ -118,8 +145,7 @@ public class SpawnHotspots : MonoBehaviour {
 			}
 
 		}
-			
+
 	}
 
 }
-	
