@@ -538,7 +538,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 80c11e870295d401
+  metroCertificateNotAfter: 002ead02aefcd401
   metroApplicationDescription: OEB Cube v3.2
   wsaImages: {}
   metroTileShortName: Cube Task

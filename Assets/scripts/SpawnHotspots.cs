@@ -8,7 +8,7 @@ public class SpawnHotspots : MonoBehaviour {
 	/* Trigger point prefab */
 	public Transform trigger_point;
 
-	/* Create a (global, oh no!) struct to encapsulate coordinates */
+	/* Global struct to encapsulate coordinates */
 	public struct CoOrds 
 	{
 		public float x, y, z;
@@ -130,7 +130,7 @@ public class SpawnHotspots : MonoBehaviour {
 			
 			/* Debugging */
 			Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
-
+			
 			/* Copy the next coordinate in the list to the temp variable */
 			coords_temp = coOrds_collection [itr];
 			itr++;
@@ -138,8 +138,11 @@ public class SpawnHotspots : MonoBehaviour {
 			/* Spawn the point */ 
 			Instantiate (trigger_point, new Vector3 (coords_temp.x, coords_temp.y, coords_temp.z), Quaternion.identity);
 
-			/* Debugging */
+			/* Debugging and hack fix */
 			if (itr == coOrds_collection.Count) {
+				
+				Instantiate (trigger_point, new Vector3 (0, 0, 0), Quaternion.identity); // Bug fix: coordinate (0, 0, 0) gets skipped above, spawn manually here.
+				
 				Debug.Log ("Entire Coords_Collection spawned!");
 				Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 			}
