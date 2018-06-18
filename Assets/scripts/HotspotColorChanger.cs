@@ -8,7 +8,7 @@ using UnityEngine;
 public class HotspotColorChanger : MonoBehaviour
 {
 
-    /* Pick object's intial color */
+    /* Pick object's "triggered" color */
     public Color activeColor = Color.red; 
     private Material cachedMaterial;
 
@@ -40,8 +40,14 @@ public class HotspotColorChanger : MonoBehaviour
         /* Change this object's color upon hotspot collision */
         cachedMaterial = cube.GetComponent<Renderer>().material;
         cachedMaterial.SetColor("_Color", activeColor);
+		
+		/* Change this object's transparency upon hotspot collision */ 
+		    Color c = cube.GetComponent<Renderer>().material.color;
+			c.a = 0.5f; // 0 - 1, where 0 is most transparent
+			cube.GetComponent<Renderer>().material.color = c;
 
-        /* Consider disabling hand dragging */
+		
+        /* Disable hand dragging */
         cube.GetComponent<HandDraggable>().enabled = false;
     }
 
