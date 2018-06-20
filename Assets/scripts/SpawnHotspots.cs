@@ -8,7 +8,8 @@ public class SpawnHotspots : MonoBehaviour {
 	/* Trigger point prefab */
 	public Transform trigger_point;
 
-	/* Global struct to encapsulate coordinates */
+	/* Global variables */
+	/* Encapsulate coordinates */
 	public struct CoOrds 
 	{
 		public float x, y, z;
@@ -22,28 +23,26 @@ public class SpawnHotspots : MonoBehaviour {
 		}
 	}
 
-	/* Another global variable (oh no!) to keep track of list iterations */
-	public int itr = 0;
+	List<CoOrds> coOrds_collection = new List<CoOrds> (); 	/* Entire point collection */
+	public int itr = 0;					/* Keep track of list iterations */
 
 	/* Use this for initialization */
 	void Start () {
+		initializeCoordinates (ref coOrds_collection);
 
 		/* Call function once on startup to create initial hotspot */
 		HotSpotTriggerInstantiate ();
-	
 	}
 
-	/* Update is called once per frame */
-	void Update () {
-	}
-		
-	/* This function is called from Hotspot.cs after Start () */
-	public void HotSpotTriggerInstantiate ()
+	/* Set up the entire point collectin list.
+	 * Parameter is the global list variable containing the entire coordinate collection.
+	 * At the start it is empty and after this function finishes it is filled
+	 * with all the coordinates in a randomized order. */
+	public void initializeCoordinates (ref List<CoOrds> coOrds_collection)
 	{
 
 		/* Useful variable and data structure definitions */
-		CoOrds coords_temp = new CoOrds (); 					/* Create a temporary CoOrds struct */
-		List<CoOrds> coOrds_collection = new List<CoOrds> (); 	/* Use a list to handle data points */
+		CoOrds coords_temp = new CoOrds (); 				
 
 		/* Create all the data points and add them to the list */
 		/* z = 0 frame				 (x, y, z) */
@@ -124,11 +123,18 @@ public class SpawnHotspots : MonoBehaviour {
 			}
 
 		}
-			
+
+		return;
+
+	}
+		
+	/* This function is called from Hotspot.cs after Start () */
+	public void HotSpotTriggerInstantiate ()
+	{
+		CoOrds coords_temp = new CoOrds (); 				
+
 		/* Begin spawning */
 		if (itr < coOrds_collection.Count) {
-			
-			/* Debugging */
 			Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 			
 			/* Copy the next coordinate in the list to the temp variable */
@@ -138,16 +144,15 @@ public class SpawnHotspots : MonoBehaviour {
 			/* Spawn the point */ 
 			Instantiate (trigger_point, new Vector3 (coords_temp.x, coords_temp.y, coords_temp.z), Quaternion.identity);
 
-			/* Debugging and hack fix */
+			/* Debugging */
 			if (itr == coOrds_collection.Count) {
-				
-				Instantiate (trigger_point, new Vector3 (0, 0, 0), Quaternion.identity); // Bug fix: coordinate (0, 0, 0) gets skipped above, spawn manually here.
-				
 				Debug.Log ("Entire Coords_Collection spawned!");
 				Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 			}
 
 		}
+
+		return;
 
 	}
 
