@@ -25,6 +25,7 @@ public class SpawnHotspots : MonoBehaviour {
 
 	List<CoOrds> coOrds_collection = new List<CoOrds> (); 	/* Entire point collection */
 	public int itr = 0;					/* Keep track of list iterations */
+	public int trial = 0;					/* Keep track of completed trials */
 
 	/* Use this for initialization */
 	void Start () {
@@ -135,12 +136,25 @@ public class SpawnHotspots : MonoBehaviour {
 
 	}
 
-	/* Reset triggered cubes and trigger points. */
+	/* Resets the task for a new trial by
+	 * destroying all the triggered cubes,
+	 * resetting itr, and shuffling the trigger
+	 * point spawn coordinates. */
 	public void reset ()
 	{
-		// Destroy activated cubes
-		// Destroy spawened trigger points
-		// Shuffle 
+		Debug.Log ("Inside reset()");
+
+		/* Destroy triggered cubes */
+		GameObject[] triggeredCubes = GameObject.FindGameObjectsWithTag ("triggered");
+
+		for(var i = 0; i < triggeredCubes.Length; i++)
+		{
+			Destroy(triggeredCubes[i]);
+		}
+
+		itr = 0;
+
+		//TODO Shuffle 
 	}
 		
 	/* This function is called from Hotspot.cs after Start () */
@@ -163,17 +177,20 @@ public class SpawnHotspots : MonoBehaviour {
 			if (itr == coOrds_collection.Count) {
 				Debug.Log ("Entire Coords_Collection spawned!");
 				Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
+			}
 
-				// TODO add trial counter
-				// increment counter
-				// check counter value
-				// 	spawn counter value object in view
-				// if count is less than 3
-				// 	destory all cubes
-				// 	destory all trigger points
-				// 	respawn cube collection
-				// 	reset trigger point iterator 
-				// 	shuffle trigger points
+		}
+		/* Start new trial */
+		else 
+		{
+			trial++; Debug.Log ("trial = " + trial + " completed!");
+
+			//TODO spawn counter value object in view/scene
+
+			if(trial < 3)
+			{
+				Debug.Log( "Starting a new trial!" );
+				reset();
 			}
 
 		}
