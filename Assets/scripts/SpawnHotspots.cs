@@ -34,6 +34,27 @@ public class SpawnHotspots : MonoBehaviour {
 		HotSpotTriggerInstantiate ();
 	}
 
+	/* Shuffles a list. In this context it shuffles the coordinate collection list. */
+	public void shuffle (ref List<CoOrds> coOrds_collection)
+	{
+
+		/* Fisher Yates shuffle list to randomize spawn order */
+		Debug.Log ("Shuffling hotspot spawn points!");
+
+		CoOrds coords_temp = new CoOrds (); 				
+		int random_placeholder;
+
+		for (int i = 0; i < coOrds_collection.Count; i++) {
+			random_placeholder = i + Random.Range (0, coOrds_collection.Count - i);
+
+			/* Swap */
+			coords_temp = coOrds_collection [i];
+			coOrds_collection [i] = coOrds_collection [random_placeholder];
+			coOrds_collection [random_placeholder] = coords_temp;
+		}
+
+	}
+
 	/* Set up the entire point collectin list.
 	 * Parameter is the global list variable containing the entire coordinate collection.
 	 * At the start it is empty and after this function finishes it is filled
@@ -105,27 +126,21 @@ public class SpawnHotspots : MonoBehaviour {
 		CoOrds coords_27 = new CoOrds (0.6f, 0.6f, 0.6f);
 		coOrds_collection.Add (coords_27);
 
-		/* Do only once, Fisher Yates shuffle list to randomize spawn order */
+		/* Shuffle list to randomize spawn order */
 		if (itr == 0) {
-
-			/* Debugging */ 
-			Debug.Log ("Shuffling hotspot spawn points!");
-
-			int random_placeholder;
-
-			for (int i = 0; i < coOrds_collection.Count; i++) {
-				random_placeholder = i + Random.Range (0, coOrds_collection.Count - i);
-
-				/* Swap */
-				coords_temp = coOrds_collection [i];
-				coOrds_collection [i] = coOrds_collection [random_placeholder];
-				coOrds_collection [random_placeholder] = coords_temp;
-			}
-
+			shuffle (ref coOrds_collection);
 		}
 
 		return;
 
+	}
+
+	/* Reset triggered cubes and trigger points. */
+	public void reset ()
+	{
+		// Destroy activated cubes
+		// Destroy spawened trigger points
+		// Shuffle 
 	}
 		
 	/* This function is called from Hotspot.cs after Start () */
@@ -148,6 +163,17 @@ public class SpawnHotspots : MonoBehaviour {
 			if (itr == coOrds_collection.Count) {
 				Debug.Log ("Entire Coords_Collection spawned!");
 				Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
+
+				// TODO add trial counter
+				// increment counter
+				// check counter value
+				// 	spawn counter value object in view
+				// if count is less than 3
+				// 	destory all cubes
+				// 	destory all trigger points
+				// 	respawn cube collection
+				// 	reset trigger point iterator 
+				// 	shuffle trigger points
 			}
 
 		}
