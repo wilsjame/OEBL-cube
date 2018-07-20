@@ -35,27 +35,6 @@ public class SpawnHotspots : MonoBehaviour {
 		HotSpotTriggerInstantiate ();
 	}
 
-	/* Shuffles a list. In this context it shuffles the coordinate collection list. */
-	public void shuffle (ref List<CoOrds> coOrds_collection)
-	{
-
-		/* Fisher Yates shuffle list to randomize spawn order */
-		Debug.Log ("Shuffling hotspot spawn points!");
-
-		CoOrds coords_temp = new CoOrds (); 				
-		int random_placeholder;
-
-		for (int i = 0; i < coOrds_collection.Count; i++) {
-			random_placeholder = i + Random.Range (0, coOrds_collection.Count - i);
-
-			/* Swap */
-			coords_temp = coOrds_collection [i];
-			coOrds_collection [i] = coOrds_collection [random_placeholder];
-			coOrds_collection [random_placeholder] = coords_temp;
-		}
-
-	}
-
 	/* Set up the entire point collectin list.
 	 * Parameter is the global list variable containing the entire coordinate collection.
 	 * At the start it is empty and after this function finishes it is filled
@@ -136,6 +115,27 @@ public class SpawnHotspots : MonoBehaviour {
 
 	}
 
+	/* Shuffles a list. In this context it shuffles the coordinate collection list. */
+	public void shuffle (ref List<CoOrds> coOrds_collection)
+	{
+
+		/* Fisher Yates shuffle list to randomize spawn order */
+		Debug.Log ("Shuffling hotspot spawn points!");
+
+		CoOrds coords_temp = new CoOrds (); 				
+		int random_placeholder;
+
+		for (int i = 0; i < coOrds_collection.Count; i++) {
+			random_placeholder = i + Random.Range (0, coOrds_collection.Count - i);
+
+			/* Swap */
+			coords_temp = coOrds_collection [i];
+			coOrds_collection [i] = coOrds_collection [random_placeholder];
+			coOrds_collection [random_placeholder] = coords_temp;
+		}
+
+	}
+
 	/* Resets the task for a new trial by
 	 * destroying all the triggered cubes,
 	 * resetting itr, and shuffling the trigger
@@ -154,7 +154,8 @@ public class SpawnHotspots : MonoBehaviour {
 
 		itr = 0;
 
-		//TODO Shuffle 
+		shuffle (ref coOrds_collection);
+
 	}
 		
 	/* This function is called from Hotspot.cs after Start () */
