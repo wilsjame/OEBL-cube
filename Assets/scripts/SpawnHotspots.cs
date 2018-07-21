@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class SpawnHotspots : MonoBehaviour {
 
-	/* Trigger point prefab */
+	/* Prefabs */
 	public Transform trigger_point;
+	public Transform trial_counter;
 
 	/* Global variables */
 	/* Encapsulate coordinates */
@@ -41,9 +42,6 @@ public class SpawnHotspots : MonoBehaviour {
 	 * with all the coordinates in a randomized order. */
 	public void initializeCoordinates (ref List<CoOrds> coOrds_collection)
 	{
-
-		/* Useful variable and data structure definitions */
-		CoOrds coords_temp = new CoOrds (); 				
 
 		/* Create all the data points and add them to the list */
 		/* z = 0 frame				 (x, y, z) */
@@ -142,7 +140,6 @@ public class SpawnHotspots : MonoBehaviour {
 	 * point spawn coordinates. */
 	public void reset ()
 	{
-		Debug.Log ("Inside reset()");
 
 		/* Destroy triggered cubes */
 		GameObject[] triggeredCubes = GameObject.FindGameObjectsWithTag ("triggered");
@@ -186,8 +183,11 @@ public class SpawnHotspots : MonoBehaviour {
 		{
 			trial++; Debug.Log ("trial = " + trial + " completed!");
 
-			//TODO spawn counter value object in view/scene
-
+			//TODO spawn trials finished counter
+			// create a coordinates list to hold trial counter locations: 1, 2, and 3
+			// spawn trial counter using coordinate list
+			/* Instantiate (trial_counter, new Vector3 (_.x, _.y, _.z), Quaternion.identity); */
+		
 			if(trial < 3)
 			{
 				Debug.Log( "Starting a new trial!" );
