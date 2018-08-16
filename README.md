@@ -8,7 +8,7 @@ The application's Unity project files are contained here.
 * [Unity development overview](https://docs.microsoft.com/en-us/windows/mixed-reality/unity-development-overview "Mixed Reality Documentation")
 * [Using Visual Studio to deploy and debug](https://docs.microsoft.com/en-us/windows/mixed-reality/using-visual-studio "Mixed Reality Documentation")
 
-I've tried maintaining updated versions of each software but kept running into errors. For now, I've found these versions to work together without any trouble. 
+Updating to the latest version of Unity and Microsoft's Mixed Reality Toolkit is under development. For now, I've found these versions to work together without any trouble. 
 
 * Unity 2017.1.2f1 (64-bit)
 * Visual Studio 2017 Community
