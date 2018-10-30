@@ -15,7 +15,7 @@ public class HotspotColorChanger : MonoBehaviour
     private void Awake()
     {
         
-        /* Set object's initial color */ 
+        /* Set cube's initial color */ 
         cachedMaterial = GetComponent<Renderer>().material;
         cachedMaterial.SetColor("_Color", Color.white);
     }
@@ -45,8 +45,8 @@ public class HotspotColorChanger : MonoBehaviour
 	Color c = cube.GetComponent<Renderer>().material.color;
 	c.a = 0.5f; // 0 - 1, where 0 is most transparent
 	cube.GetComponent<Renderer>().material.color = c;
-
-	/* ID this object with a tag */
+ 
+	/* ID this object */
 	cube.tag = "triggered";
 		
         /* Disable hand dragging */
