@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
+using System.Diagnostics;
+using System.Threading;
 
 public class SpawnHotspots : MonoBehaviour {
 
@@ -32,9 +34,22 @@ public class SpawnHotspots : MonoBehaviour {
 	public int itr = 0;					/* Keep track of list iterations */
 	public int trial = 0;					/* Keep track of completed trials */
 
+	public string fileName = "cube_task_time_";
+	public Stopwatch stopwatch = new Stopwatch();
+	public string path;
+
 	/* Use this for initialization */
 	void Start () 
 	{
+
+		// Create unique out file 
+		fileName = fileName + System.DateTime.Now + ".txt";
+		fileName = fileName.Replace("/","-");
+		fileName = fileName.Replace(":",";");
+		path = Path.Combine(Application.persistentDataPath, fileName);
+		//Test outfile
+		//File.WriteAllText(@path, "trace");
+
 		initializeCoordinates (ref coOrds_collection, ref counter_collection);
 
 		/* Call function once on startup to create initial hotspot */
@@ -130,7 +145,7 @@ public class SpawnHotspots : MonoBehaviour {
 	{
 
 		/* Fisher Yates shuffle list to randomize spawn order */
-		Debug.Log ("Shuffling hotspot spawn points!");
+		UnityEngine.Debug.Log ("Shuffling hotspot spawn points!");
 
 		CoOrds coords_temp = new CoOrds (); 				
 		int random_placeholder;
@@ -175,11 +190,18 @@ public class SpawnHotspots : MonoBehaviour {
 	/* This function is called from Hotspot.cs after Start () */
 	public void HotSpotTriggerInstantiate ()
 	{
+		
+		/* check if user has tapped first point */
+		if (itr == 1) {
+			// Begin timing
+			stopwatch.Start();
+		}
+
 		CoOrds coords_temp = new CoOrds (); 				
 
 		/* Begin spawning */
 		if (itr < coOrds_collection.Count) {
-			Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
+			UnityEngine.Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 			
 			/* Copy the next coordinate in the list to the temp variable */
 			coords_temp = coOrds_collection [itr];
@@ -202,26 +224,37 @@ public class SpawnHotspots : MonoBehaviour {
 
 			local_trigger_point.localPosition = new Vector3 (coords_temp.x, coords_temp.y, coords_temp.z); // Spawn position relative to parent 
 
-			/* Debugging */
+			/* UnityEngine.Debugging */
 			if (itr == coOrds_collection.Count) {
-				Debug.Log ("Entire Coords_Collection spawned!");
-				Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
+				UnityEngine.Debug.Log ("Entire Coords_Collection spawned!");
+				UnityEngine.Debug.Log ("coOrds_collection count: " + coOrds_collection.Count + " itr: " + itr);
 			}
 
 		}
 		/* Start new trial and update counter */
 		else {
-			Debug.Log( "Starting a new trial!" );
+			UnityEngine.Debug.Log( "Starting a new trial!" );
 
 			/* Copy counter location coordinates */
 			coords_temp = counter_collection [trial];
 			trial++; 
 
+			// Stop timing
+			System.TimeSpan ts = stopwatch.Elapsed;
+			stopwatch.Stop();
+			UnityEngine.Debug.Log("Time elapsed: " + ts);
+			stopwatch.Reset();
+
+			// Write time to file
+			File.AppendAllText(@path, "Trial " + trial + " : ");
+			File.AppendAllText(@path, ts.ToString());
+			File.AppendAllText(@path, "\r\n");
+
 			/* Spawn counter */
 			Transform local_trial_counter = Instantiate (trial_counter, new Vector3 (coords_temp.x, coords_temp.y, coords_temp.z), Quaternion.identity, this.transform); // Make this gameObject the parent
 			local_trial_counter.localPosition  = new Vector3 (coords_temp.x, coords_temp.y, coords_temp.z); // Spawn position relative to parent 
 
-			Debug.Log( "Trial " + trial + " completed!");
+			UnityEngine.Debug.Log( "Trial " + trial + " completed!");
 
 			if (trial < 3) {
 				reset();
